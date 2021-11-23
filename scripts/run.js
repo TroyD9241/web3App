@@ -18,8 +18,11 @@ const main = async () => {
     let waveTxn = await waveContract.wave('booped ya');
     await waveTxn.wait()
 
-    waveTxn = await waveContract.connect(randomPerson).wave('boopedbooped');
+    let waveTxn2 = await waveContract.wave('booped ya again');
     await waveTxn.wait()
+
+    waveTxn = await waveContract.connect(randomPerson).wave('boopedbooped');
+    await waveTxn2.wait()
 
     let allWaves = await waveContract.getAllWaves();
     console.log(allWaves)
