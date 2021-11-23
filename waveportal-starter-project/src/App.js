@@ -8,10 +8,10 @@ const App = () => {
   const [message, setMessage] = useState("");
 
   /**
-   * Create a varaible here that holds the contract address after you deploy!
+   * Create a variable here that holds the contract address after you deploy!
    */
   const [allWaves, setAllWaves] = useState([]);
-  const contractAddress = "0xB77F1481c7920324e943CC3E9F2Fa85D71eD22a8";
+  const contractAddress = "0x497B0560151E83dF6Bdfa5D1bD113e48eBD7D80E";
   const contractABI = abi.abi;
 
   // const submitValue = () => {
