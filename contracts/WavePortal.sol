@@ -7,13 +7,40 @@ import "hardhat/console.sol";
 contract WavePortal {
     uint256 totalWaves;
 
-    constructor() {
+    event newWave(address indexed from, uint256 timestamp, string message);
+
+    struct Wave {
+        address waver;
+        string message;
+        uint256 timestamp;
+    }
+    // variable waves
+    Wave[] waves;
+
+    constructor() payable {
         console.log('boop');
     }
 
-    function wave() public {
+    function wave(string memory _message) public {
         totalWaves += 1;
         console.log("%s has waved!", msg.sender);
+
+        waves.push(Wave(msg.sender, _message, block.timestamp));
+
+        emit newWave(msg.sender, block.timestamp, _message);
+
+        uint256 prizeAmount = 0.0001 ether;
+        require(
+            prizeAmount <= address(this).balance,
+            "I am poor"
+        );
+
+        (bool success, ) = (msg.sender).call{value: prizeAmount}("");
+        require(success, "Failed to withrdaw");
+    }
+
+    function getAllWaves() public view returns (Wave[] memory) {
+        return waves;
     }
 
     function getTotalWaves() public view returns (uint256) {
